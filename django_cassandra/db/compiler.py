@@ -29,7 +29,7 @@ from djangotoolbox.db.basecompiler import NonrelQuery, NonrelCompiler, \
 from .utils import *
 from .predicate import *
 
-from uuid import uuid4
+from uuid import uuid1
 from cassandra import Cassandra
 from cassandra.ttypes import *
 from thrift.transport.TTransport import TTransportException
@@ -426,7 +426,7 @@ class SQLInsertCompiler(NonrelInsertCompiler, SQLCompiler):
         # Eventually we can optimize this and remove the column where it makes sense.
         key = data.get(pk_column)
         if not key:
-            key = str(uuid4())
+            key = str(uuid1())
             # Insert the key as column data too
             # FIXME. See the above comment. When the primary key handling is optimized,
             # then we would not always add the key to the data here.
